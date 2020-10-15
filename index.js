@@ -132,6 +132,20 @@ client.connect(err => {
         res.send(documents)
     })
   })
+
+  //for changing any order status by admin
+  app.patch('/status-update/id',(req, res)=>{
+    const id = req.query.id;
+    const body = req.body;
+    const {status} = body;
+    orderCollection.updateOne(
+        { _id: ObjectId(id) },
+        {
+          $set: { status: status},
+        }
+    )
+    .then(result => res.send(result.modifiedCount))
+  })
 });
 
 
