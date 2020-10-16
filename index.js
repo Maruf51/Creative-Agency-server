@@ -15,7 +15,9 @@ app.use(cors())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static('service'))
-app.use(fileUpload())
+app.use(fileUpload({
+  createParentPath: true
+}));
 
 app.get('/', (req, res) => {
     res.send('everything is ok')
